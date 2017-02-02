@@ -1,0 +1,12 @@
+{
+  "host": "HOST",
+  "port": "PORT",
+  "mongodb": "MONGODB_URI",
+  "public": "../public/",
+  "auth": {
+    "token": {
+      "secret": "FEATHERS_AUTH_SECRET"
+    },
+    "local": {}
+  }
+}
