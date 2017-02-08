@@ -1,4 +1,4 @@
-# feathers-vuehs
+# feathers-vuejs
 
 > FeathersJS + Vue.js web application framework.
 
