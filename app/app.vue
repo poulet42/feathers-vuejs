@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <navbar brand="Feathers / Vue.js"></navbar>
-    <div class="container mt-3">
+    <div class="container">
+      <higurlz></higurlz>
       <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-  import 'bootstrap';
   import { mapActions } from 'vuex';
   export default {
     name: 'app',
     components: {
-      navbar: require('./components/navbar.vue')
+      higurlz: require('./components/higurlz.vue')
     },
     methods: mapActions(['authenticate']),
     created () { this.authenticate().catch(err => {}); }

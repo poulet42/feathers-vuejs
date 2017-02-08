@@ -10,16 +10,16 @@ module.exports = {
         options: {
           loaders: {
             css: ExtractTextPlugin.extract({
-              loader: 'css-loader',
-              fallbackLoader: 'vue-style-loader'
+              use: 'css-loader',
+              fallback: 'vue-style-loader'
             }),
             scss: ExtractTextPlugin.extract({
-              loader: 'css-loader!sass-loader',
-              fallbackLoader: 'vue-style-loader'
+              use: 'css-loader!sass-loader',
+              fallback: 'vue-style-loader'
             }),
             sass: ExtractTextPlugin.extract({
-              loader: 'css-loader!sass-loader?indentedSyntax',
-              fallbackLoader: 'vue-style-loader'
+              use: 'css-loader!sass-loader?indentedSyntax',
+              fallback: 'vue-style-loader'
             })
           }
         }
