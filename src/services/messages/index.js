@@ -4,7 +4,7 @@ const service = require('feathers-mongoose');
 const messages = require('./messages-model');
 const hooks = require('./hooks');
 
-module.exports = function() {
+module.exports = function () {
   const app = this;
 
   const options = {

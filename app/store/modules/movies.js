@@ -6,22 +6,26 @@ const state = {
 
 const getters = {
   getMovies (state) {
-    console.log('getter called !', state.movies)
+    console.log('getter called !', state.movies);
     return state.movies;
   }
 };
 
 const mutations = {
-  populate (state, moviesList) {
-    console.log(moviesList.length, moviesList)
-    state.movies.push(...moviesList)
+  ADD_MOVIES (state, moviesList) {
+    state.movies.push(...moviesList);
+  },
+  REPLACE_MOVIES (state, moviesList) {
+    state.movies = moviesList
   }
 };
 
 const actions = {
-  listMovies: ({dispatch, commit}, payload) => {
-    return feathers.service('movies').find({query: payload})
-    .then(result => {commit('populate', result)});
+  listMovies: ({dispatch, commit}, {mode, query}) => {
+    if (typeof mode == 'undefined') { mode = 'ADD' }
+    console.log("query : ", query)
+    return feathers.service('movies').find({query})
+    .then(result => { commit((mode || 'ADD') + '_MOVIES', result); });
   }
 };
 
