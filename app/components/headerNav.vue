@@ -1,6 +1,8 @@
 <template>
 	<header class='Header'>
-		(header bar)
+		<a href="#" class="header-link">
+			<i class='fa fa-burger'></i>
+		</a>
 	</header>
 </template>
 
@@ -11,7 +13,6 @@ export default {
 
   data () {
     return {
-
     };
   }
 };

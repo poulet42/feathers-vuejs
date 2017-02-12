@@ -1,25 +1,36 @@
 <template lang="pug">
-.Sidebar
-	.Sidebar__module
+	.Sidebar
+		.Sidebar__module.control
+			label.label Genres
+			span.select.is-fullwidth
+				select.is-fullwidth(v-model="getGenre" @change="optionsChange({page: 1, genre: getGenre})")
+					option(@click="a(null)") Select a genre
+					option(v-for="genre in genres") {{ genre }}
 </template>
 
 <script>
-export default {
-
-  name: 'sidebar',
-
-  data () {
-    return {
-
-    };
-  }
-};
+	import { mapGetters, mapActions, mapMutations } from 'vuex';
+	export default {
+		name: 'sidebar',
+		computed: mapGetters({getGenre: 'getGenre'}),
+		data () {
+			return {
+				genres: ['Action', 'Adventure','Animation','Biography','Comedy','Crime','Documentary','Drama','Family','Fantasy','Film-noir','History','Horror','Music','Musical','Mystery','Romance','Sci-Fi','Sport','Thriller','War','Western']
+			};
+		},
+		methods: {
+			optionsChange (newOptions) {
+				alert(newOptions.genre)
+				return this.$emit('optionsChanged', newOptions);
+			}
+		}
+	};
 </script>
 
 <style lang="stylus" scoped>
 	.Sidebar
 		width 200px
-		// background-color #222
+		padding 20px
 		position relative
 		z-index 4
 		box-shadow 0px 9px 9px rgba(179,179,179,0.4)

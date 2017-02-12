@@ -32,6 +32,11 @@ input, textarea
 	flex 1
 	padding 20px
 	background-color rgb(251, 251, 252)
+.bump
+	transition transform 0.2s
+.bump:hover
+	transform translateY(-10px)
+	box-shadow 0px 3px 12px rgba(52,52,52,0.4)
 .card.has-overlay
 	overflow hidden
 	&:hover .card-overlay
@@ -48,12 +53,12 @@ input, textarea
 	right 0
 	bottom 0
 	transform translateY(100%)
-	transition all 0.3s
+	transition all 0.5s
 	&.is-black
 		background-color rgba(22, 22, 22, 0.8)
 		color #fff
 	&.is-white
-		background-color rgba(252, 252, 252, 0.6)
+		background-color rgba(252, 252, 252, 0.99)
 		color #333
 	& .title, & .content
 		color inherit
@@ -78,7 +83,7 @@ input, textarea
 		opacity 0.7
 		transition opacity 0.3s
 		margin-bottom 10px
-.image .is-4by6
+.image.is-4by6
 	padding-bottom 150%
 .is-layer-2
 	position relative

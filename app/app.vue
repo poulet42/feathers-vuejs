@@ -1,11 +1,7 @@
 <template>
 	<div id="app">
 		<header-nav></header-nav>
-		<input type="text">
-		<div class="main">
-			<sidebar></sidebar>
-			<router-view></router-view>
-		</div>
+		<router-view></router-view>
 	</div>
 </template>
 
@@ -18,7 +14,9 @@
 			sidebar: require('./components/sidebar.vue')
 		},
 		methods: mapActions(['authenticate']),
-		created () { this.authenticate().catch(err => {}); }
+		created () { 
+			this.authenticate().catch(err => {});
+		}
 	}
 </script>
 

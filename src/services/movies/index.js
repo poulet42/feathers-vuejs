@@ -20,14 +20,17 @@ class Service {
   }
   find (params) {
     let defaultOpt = {page: 1, sort_by: 'date_added', order_by: 'desc', query_term: null, genre: null},
-      qs = extend(defaultOpt, params.query);
+    qs = extend(defaultOpt, params.query);
     return makeRequest({uri: '/list_movies.json', qs})
     .then((result) => { return result.data.movies; })
     .catch((err) => { console.log('attontion !!!', err); });
   }
 
   get (id, params) {
-    return makeRequest('/${id}');
+    console.log(id)
+    return makeRequest({uri: '/movie_details.json', qs: {movie_id: id}})
+    .then((result) => { return result.data.movie; })
+    .catch((err) => { console.log('attontion !!!', err); });
   }
 
   // create(data, params) {
