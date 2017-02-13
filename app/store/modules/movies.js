@@ -37,12 +37,15 @@ const mutations = {
   },
   SET_GENRE (state, genre) {
     state.options.genre = genre;
+  },
+  SET_PAGE (state, page) {
+    state.options.page = page;
   }
 };
 
 const actions = {
-  listMovies: ({dispatch, commit}, {mode = 'ADD', query}) => {
-    return feathers.service('movies').find({query}).then(result => { commit((mode) + '_MOVIES', result); });
+  listMovies: ({dispatch, commit}, {mode = 'ADD'}) => {
+    return feathers.service('movies').find({query: state.options}).then(result => { commit((mode) + '_MOVIES', result); });
   }
 };
 

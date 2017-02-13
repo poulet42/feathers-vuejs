@@ -52,7 +52,7 @@
 			},
 			computed: mapGetters({movies: 'getMovies', options: 'getOptions'}),
 			created () {
-				this.$store.dispatch('listMovies', {mode: 'ADD', query: this.options})
+				this.$store.dispatch('listMovies', {mode: 'ADD'})
 			},
 			methods: {
 				setOptions(options) {
@@ -63,14 +63,14 @@
 				getList(mode) {
 					if (mode == "REPLACE")
 						$('.view').animate({scrollTop: 0}, 600);
-					this.$store.dispatch('listMovies', {mode, query: this.options});
+					this.$store.dispatch('listMovies', {mode});
 				},
 				infiniteScroll(e) {
 					let movieGrid = e.target;
 					if (movieGrid.scrollTop >= movieGrid.scrollHeight - movieGrid.offsetHeight && !this.loading) {
 						this.loading = true;
-						this.options.page++
-						this.$store.dispatch('listMovies', {mode: 'ADD', query: this.options});
+						this.$store.commit('SET_PAGE', this.options.page + 1)
+						this.getList('ADD')
 						this.$nextTick( () => {this.loading = false;})
 					}
 				}
