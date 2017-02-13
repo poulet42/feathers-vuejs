@@ -1,9 +1,9 @@
 <template lang="pug">
 	.Sidebar
 		.Sidebar__module.control
-			label.label Genres
+			label.label Genres {{ getGenre }}
 			span.select.is-fullwidth
-				select.is-fullwidth(v-model="getGenre" @change="optionsChange({page: 1, genre: getGenre})")
+				select.is-fullwidth(v-model='selectedGenre' @change="optionsChange" ref="selectGenre")
 					option(@click="a(null)") Select a genre
 					option(v-for="genre in genres") {{ genre }}
 </template>
@@ -12,18 +12,24 @@
 	import { mapGetters, mapActions, mapMutations } from 'vuex';
 	export default {
 		name: 'sidebar',
-		computed: mapGetters({getGenre: 'getGenre'}),
+		computed: {
+			...mapGetters({getGenre: 'getGenre'}),
+			selectedGenre () {return this.getGenre}
+		},
 		data () {
 			return {
 				genres: ['Action', 'Adventure','Animation','Biography','Comedy','Crime','Documentary','Drama','Family','Fantasy','Film-noir','History','Horror','Music','Musical','Mystery','Romance','Sci-Fi','Sport','Thriller','War','Western']
 			};
 		},
 		methods: {
-			optionsChange (newOptions) {
-				alert(newOptions.genre)
-				return this.$emit('optionsChanged', newOptions);
+			optionsChange () {
+				this.$emit('optionsChanged', {
+					page: 1,
+					genre: this.genres[this.$refs.selectGenre.selectedIndex - 1]
+				});
+
 			}
-		}
+		},
 	};
 </script>
 

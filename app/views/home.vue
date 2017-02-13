@@ -56,6 +56,7 @@
 			},
 			methods: {
 				setOptions(options) {
+					console.log('setter called', options)
 					this.$store.commit('SET_OPTIONS', options)
 					this.getList('REPLACE')
 				},
