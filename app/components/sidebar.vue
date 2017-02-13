@@ -3,7 +3,7 @@
 		.Sidebar__module.control
 			label.label Genres {{ getGenre }}
 			span.select.is-fullwidth
-				select.is-fullwidth(v-model='selectedGenre' @change="optionsChange" ref="selectGenre")
+				select.is-fullwidth(v-model='getGenre' @change="optionsChange" ref="selectGenre")
 					option(@click="a(null)") Select a genre
 					option(v-for="genre in genres") {{ genre }}
 </template>
@@ -14,7 +14,6 @@
 		name: 'sidebar',
 		computed: {
 			...mapGetters({getGenre: 'getGenre'}),
-			selectedGenre () {return this.getGenre}
 		},
 		data () {
 			return {
