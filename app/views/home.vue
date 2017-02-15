@@ -2,14 +2,14 @@
 	<div class="main">
 		<sidebar @optionsChanged="setOptions"></sidebar>
 		<section class="view section" @scroll="infiniteScroll">
-			<h3 class="title">Home</h3>
+			<h3 class="title" @click="fagget" >Home</h3>
 			<hr>
 			<div class='Movies columns is-multiline'>
 				<div class="column is-one-quarter-widescreen is-one-third-desktop is-half-tablet is-one-two-mobile" v-for="movie in movies">
 					<div class="card has-overlay bump">
 						<div class="card-image">
 							<figure class="image is-4by6">
-								<img :src="movie.large_cover_image" alt="Image">
+								<img :src="movie.images.poster" alt="Image">
 							</figure>
 							<small class='card-meta is-top-right'>{{ movie.year }}</small>
 							<div class='card-meta is-bottom-left'>
@@ -19,7 +19,7 @@
 								<div class="content">
 									<p class="title is-4">Synopsis</p>
 									<hr>
-									<article>{{ movie.summary | ellipsis(400) }}</article>
+									<article>{{ movie.synopsis | ellipsis(400) }}</article>
 								</div>
 							</div>
 						</div>
@@ -55,6 +55,10 @@
 				this.$store.dispatch('listMovies', {mode: 'ADD'})
 			},
 			methods: {
+				fagget() {
+					alert('prout')
+					// this.$store.dispatch('getPages')
+				},
 				setOptions(options) {
 					console.log('setter called', options)
 					this.$store.commit('SET_OPTIONS', options)

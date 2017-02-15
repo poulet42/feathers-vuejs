@@ -1,7 +1,7 @@
 import feathers from '../../feathers';
 
 const state = {
-  options: {page: 1, genre: ''},
+  options: {page: 1, genre: undefined},
   movies: []
 };
 
@@ -46,6 +46,9 @@ const mutations = {
 const actions = {
   listMovies: ({dispatch, commit}, {mode = 'ADD'}) => {
     return feathers.service('movies').find({query: state.options}).then(result => { commit((mode) + '_MOVIES', result); });
+  },
+  getPages: ({dispatch, commit}) => {
+    return feathers.service('movies').find().then(result => {console.log(result)})
   }
 };
 

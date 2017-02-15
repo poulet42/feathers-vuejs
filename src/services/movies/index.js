@@ -11,18 +11,22 @@ var extend = function (a, b) {
   return a;
 };
 const makeRequest = request.defaults({
-  baseUrl: 'https://yts.ag/api/v2',
+  baseUrl: 'http://localhost:5000/',
   json: true
 });
 class Service {
   constructor (options) {
     this.options = options || {};
   }
-  find (params) {
-    let defaultOpt = {page: 1, sort_by: 'date_added', order_by: 'desc', query_term: null, genre: null},
+  async find (params) {
+    let defaultOpt = {page: undefined, sort: undefined, order: undefined, genre: undefined, keywords: undefined},
     qs = extend(defaultOpt, params.query);
-    return makeRequest({uri: '/list_movies.json', qs})
-    .then((result) => { return result.data.movies; })
+    let page = qs.page;
+    qs.page = undefined;
+    console.log(params.query);
+    // let source = typeof qs.query === undefined ? ['movies' + page] : await makeRequest({uri: '/movies/'})
+    return makeRequest({uri: (typeof page != "undefined" ? '/movies/' + page : '/movies'), qs})
+    .then((result) => { return result; })
     .catch((err) => { console.log('attontion !!!', err); });
   }
 
