@@ -18,13 +18,12 @@ class Service {
   constructor (options) {
     this.options = options || {};
   }
-  async find (params) {
+  find (params) {
     let defaultOpt = {page: undefined, sort: undefined, order: undefined, genre: undefined, keywords: undefined},
     qs = extend(defaultOpt, params.query);
     let page = qs.page;
     qs.page = undefined;
     console.log(params.query);
-    // let source = typeof qs.query === undefined ? ['movies' + page] : await makeRequest({uri: '/movies/'})
     return makeRequest({uri: (typeof page != "undefined" ? '/movies/' + page : '/movies'), qs})
     .then((result) => { return result; })
     .catch((err) => { console.log('attontion !!!', err); });

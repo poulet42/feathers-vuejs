@@ -7,7 +7,6 @@ const state = {
 
 const getters = {
   getMovies (state) {
-    console.log('getter called !', state.movies);
     return state.movies;
   },
   getOptions (state) {
@@ -27,9 +26,11 @@ var extend = function (a, b) {
 };
 const mutations = {
   ADD_MOVIES (state, moviesList) {
+    console.log('mutation add')
     state.movies.push(...moviesList);
   },
   REPLACE_MOVIES (state, moviesList) {
+    console.log('mutation replace')
     state.movies = moviesList
   },
   SET_OPTIONS (state, options) {
@@ -49,6 +50,18 @@ const actions = {
   },
   getPages: ({dispatch, commit}) => {
     return feathers.service('movies').find().then(result => {console.log(result)})
+  },
+  searchMovies: ({dispatch, commit}) => {
+    feathers.service('movies').find()
+    var kw = state.options.keywords;
+    feathers.service('movies').find()
+    .then(pagesList => {
+      for (let i = 0, j = pagesList.length - 1; i <= j; i++) {
+        feathers.service('movies').find({query: {page: i + 1, keywords: kw}})
+        .then(result => commit( (i == 0 ? 'REPLACE' : 'ADD') + '_MOVIES', result))
+        .catch( err => console.log('error: ' + err))
+      }
+    })
   }
 };
 

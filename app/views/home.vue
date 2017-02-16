@@ -71,7 +71,7 @@
 				},
 				infiniteScroll(e) {
 					let movieGrid = e.target;
-					if (movieGrid.scrollTop >= movieGrid.scrollHeight - movieGrid.offsetHeight && !this.loading) {
+					if (movieGrid.scrollTop >= movieGrid.scrollHeight - movieGrid.offsetHeight && !this.loading && !this.options.keywords) {
 						this.loading = true;
 						this.$store.commit('SET_PAGE', this.options.page + 1)
 						this.getList('ADD')

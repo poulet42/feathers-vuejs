@@ -3,7 +3,7 @@
 		.Sidebar__module.control
 			label.label Rechercher
 			p.control
-				input(type="text" v-model="search" placeholder="H2G2", @keyup="searchChange").input
+				input(type="text" v-model="search" placeholder="H2G2", @input="searchChange").input
 		.Sidebar__module
 			label.label Genres
 			p.control
@@ -35,16 +35,12 @@
 				});
 			},
 			searchChange () {
-				console.log(this.search)
 				if(this.searchTimeout)
 					clearTimeout(this.searchTimeout);
 				this.searchTimeout = setTimeout(() => {
-					// this.$emit('optionsChanged', {
-					// 	page: 1,
-					// 	keywords: this.search
-					// });
-					// this.$store.dispatch()
-				}, 500);
+					this.$emit('optionsChanged', {page: 1, keywords: this.search});
+					this.$store.dispatch(this.search != '' ? 'searchMovies' : 'listMovies', {mode: 'REPLACE'})
+				}, 800);
 			}
 		},
 	};
