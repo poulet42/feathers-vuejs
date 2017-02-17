@@ -7,6 +7,11 @@ export default [
     component: require('../views/home.vue')
   },
   {
+    path: 'movies/:id',
+    name: 'movie',
+    component: require('../views/single-movie.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: require('../views/login.vue'),

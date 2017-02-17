@@ -57,7 +57,7 @@ const actions = {
     feathers.service('movies').find()
     .then(pagesList => {
       for (let i = 0, j = pagesList.length - 1; i <= j; i++) {
-        feathers.service('movies').find({query: {page: i + 1, keywords: kw}})
+        feathers.service('movies').find({query: {...state.options, page: i + 1, keywords: kw}})
         .then(result => commit( (i == 0 ? 'REPLACE' : 'ADD') + '_MOVIES', result))
         .catch( err => console.log('error: ' + err))
       }

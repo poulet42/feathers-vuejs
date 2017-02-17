@@ -6,51 +6,29 @@
 			<hr>
 			<div class='Movies columns is-multiline'>
 				<div class="column is-one-quarter-widescreen is-one-third-desktop is-half-tablet is-one-two-mobile" v-for="movie in movies">
-					<div class="card has-overlay bump">
-						<div class="card-image">
-							<figure class="image is-4by6">
-								<img :src="movie.images.poster" alt="Image">
-							</figure>
-							<small class='card-meta is-top-right'>{{ movie.year }}</small>
-							<div class='card-meta is-bottom-left'>
-								<small><a class="tag is-white" v-for="genre in movie.genres" @click="setOptions({page: 1, genre})">{{ genre }}</a></small>
-							</div>
-							<div class="card-overlay is-black">
-								<div class="content">
-									<p class="title is-4">Synopsis</p>
-									<hr>
-									<article>{{ movie.synopsis | ellipsis(400) }}</article>
-								</div>
-							</div>
-						</div>
-						<div class="card-content is-layer-2">
-							<div class="content">
-								<p class="title is-4">{{ movie.title }}</p>
-							</div>
-						</div>
-					</div>
+					<movie-card :movieData="movie"></movie-card>
 				</div>
 			</div>
-		</div>
-	</template>
+		</template>
 
 	<script>
 		import { mapGetters, mapActions } from 'vuex';
 		export default {
 			components: {
-				sidebar: require('../components/sidebar.vue')
+				sidebar: require('../components/sidebar.vue'),
+				movieCard: require('../components/movie-card.vue')
 			},
 			data () {
 				return  {
 					loading: false,
 				}
 			},
-			filters: {
-				ellipsis: function(str, maxChars = 200) {
-					return str.length > maxChars ? str.slice(0, maxChars - 3) + '...' : str
+			computed: {
+				...mapGetters({movies: 'getMovies', options: 'getOptions'}),
+				slugify: function() {
+
 				}
 			},
-			computed: mapGetters({movies: 'getMovies', options: 'getOptions'}),
 			created () {
 				this.$store.dispatch('listMovies', {mode: 'ADD'})
 			},
